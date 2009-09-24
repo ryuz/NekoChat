@@ -44,7 +44,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NekoChat Ver 1.00";
+            this.label1.Text = "NekoChat Ver 1.01";
             // 
             // label2
             // 

@@ -20,6 +20,11 @@ namespace NekoChat
         // 暗号化
         public static string EncryptString(string str, string key)
         {
+            if (key.Length <= 0)
+            {
+                return str;
+            }
+
             byte[] bytesIn = Encoding.UTF8.GetBytes(str);
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
             byte[] bytesKey = Encoding.UTF8.GetBytes(key);
@@ -41,6 +46,16 @@ namespace NekoChat
         {
             string result = "";
 
+            if (str.Length <= 0)
+            {
+                return "";
+            }
+
+            if (key.Length <= 0)
+            {
+                return str;
+            }
+            
             try
             {
                 using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())

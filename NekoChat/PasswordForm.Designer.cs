@@ -159,6 +159,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PasswordForm";
+            this.Load += new System.EventHandler(this.PasswordForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
