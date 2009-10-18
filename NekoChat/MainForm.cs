@@ -38,6 +38,8 @@ namespace NekoChat
             loadConfiguration();
             updateChannelList();
             updateView();
+
+            timer.Enabled = true;
         }
         
         // 閉じる
@@ -195,16 +197,8 @@ namespace NekoChat
                 cc.WriteMessage(message);
                 
                 // 表示に追加
-                richTextBoxView.AppendText(message + "\n");
-                
-                // 末尾に移動
-                richTextBoxView.Focus();
-                richTextBoxView.SelectionStart = richTextBoxView.TextLength;
-                richTextBoxView.SelectionLength = 0;
-                richTextBoxView.ScrollToCaret();
-
-                // フォーカスを戻す
-                textBoxInput.Focus();
+                richTextBoxView.Text += message + "\n";
+                viewTextScrollToEnd();
 
                 // ヒストリに追加
                 cc.AddHistry(text);
@@ -212,6 +206,24 @@ namespace NekoChat
                 histryOrign = "";
             }
         }
+
+        // 末尾に移動
+        private void viewTextScrollToEnd()
+        {
+            richTextBoxView.SelectionStart = richTextBoxView.TextLength;
+            richTextBoxView.SelectionLength = 0;
+            richTextBoxView.ScrollToCaret();
+        }
+
+        // 末尾に移動
+        private void consoleTextScrollToEnd()
+        {
+            // 末尾に移動
+            richTextBoxConsole.SelectionStart = richTextBoxConsole.TextLength;
+            richTextBoxConsole.SelectionLength = 0;
+            richTextBoxConsole.ScrollToCaret();
+        }
+
 
         // up/down キー
         public void InputUpDownKey(Keys keyData)
@@ -269,12 +281,6 @@ namespace NekoChat
             }
             ChatChannel cc = (ChatChannel)channelArray[channelIndex];
 
-            /*
-            if (MessageBox.Show("貼り付けますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-            {
-                return;
-            }*/
-
             PasteForm dlg = new PasteForm();
             string [] textArray = text.Replace("\r\n", "\n").TrimEnd('\n').Split('\n');
             dlg.textBox.Text = "";
@@ -292,6 +298,8 @@ namespace NekoChat
             {
                 string message = DateTime.Now.ToString("HH:mm:ss ") + String.Format("{0,-8} ", cc.NickName) + textArray[i];
                 cc.WriteMessage(message);
+                richTextBoxView.Text += message + "\n";
+                viewTextScrollToEnd();
             }
         }
         
@@ -337,8 +345,26 @@ namespace NekoChat
                         }
                     }
                 }
+
+                if (index == channelIndex)
+                {
+                    richTextBoxView.Text = cc.Text;
+                    viewTextScrollToEnd();
+                }
+                else
+                {
+                    for (int i = 0; i < taNew.Count(); i++)
+                    {
+                        if (taNew[i].Length > 0)
+                        {
+                            richTextBoxConsole.Text += "<" + cc.ChannelName + "> " + taNew[i] + "\n";
+                            consoleTextScrollToEnd();
+                        }
+                    }
+                }
             }
 
+            // キーワードチェック
             if (keyHit)
             {
                 if (this.WindowState == FormWindowState.Minimized)
@@ -361,7 +387,7 @@ namespace NekoChat
                 cc = (ChatChannel)channelArray[channelIndex];
                 if ( viewIndex != channelIndex || cc.UnviewedMessage )
                 {
-                    richTextBoxView.Text = cc.Text;
+//                    richTextBoxView.Text = cc.Text;
                     viewIndex = channelIndex;
                     update = true;
 

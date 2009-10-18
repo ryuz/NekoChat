@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.richTextBoxView = new System.Windows.Forms.RichTextBox();
-            this.textBoxInput = new NekoChat.InputTextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listBoxUser = new System.Windows.Forms.ListBox();
             this.listBoxChannel = new System.Windows.Forms.ListBox();
@@ -50,8 +49,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.richTextBoxConsole = new System.Windows.Forms.RichTextBox();
+            this.textBoxInput = new NekoChat.InputTextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -59,6 +61,9 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -68,8 +73,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.richTextBoxView);
-            this.splitContainer1.Panel1.Controls.Add(this.textBoxInput);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
             // 
             // splitContainer1.Panel2
             // 
@@ -81,12 +85,6 @@
             this.richTextBoxView.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBoxView.Name = "richTextBoxView";
             this.richTextBoxView.ReadOnly = true;
-            // 
-            // textBoxInput
-            // 
-            resources.ApplyResources(this.textBoxInput, "textBoxInput");
-            this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxInput_KeyDown);
             // 
             // splitContainer2
             // 
@@ -211,16 +209,40 @@
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
-            // timer1
+            // timer
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 200;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer.Interval = 200;
+            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // notifyIcon
             // 
             resources.ApplyResources(this.notifyIcon, "notifyIcon");
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
+            // 
+            // splitContainer3
+            // 
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.richTextBoxView);
+            this.splitContainer3.Panel1.Controls.Add(this.textBoxInput);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.richTextBoxConsole);
+            // 
+            // richTextBoxConsole
+            // 
+            resources.ApplyResources(this.richTextBoxConsole, "richTextBoxConsole");
+            this.richTextBoxConsole.Name = "richTextBoxConsole";
+            // 
+            // textBoxInput
+            // 
+            resources.ApplyResources(this.textBoxInput, "textBoxInput");
+            this.textBoxInput.Name = "textBoxInput";
+            this.textBoxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxInput_KeyDown);
             // 
             // MainForm
             // 
@@ -235,7 +257,6 @@
             this.ClientSizeChanged += new System.EventHandler(this.MainForm_ClientSizeChanged);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -243,6 +264,10 @@
             this.splitContainer2.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,7 +284,7 @@
         private System.Windows.Forms.ListBox listBoxChannel;
         private System.Windows.Forms.ToolStripMenuItem channleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStripMenuItem proparityToolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBoxView;
         private System.Windows.Forms.NotifyIcon notifyIcon;
@@ -272,6 +297,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logConverterToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.RichTextBox richTextBoxConsole;
     }
 }
 
