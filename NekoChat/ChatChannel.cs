@@ -359,8 +359,9 @@ namespace NekoChat
             string      rt;
             int         intervalRx = 0;
             int         intervalUsr = 0;
-            bool updateRx;
-            bool updateUsr;
+            bool        updateRx;
+            bool        updateUsr;
+            bool        first = true;
 
             for ( ; ; )
             {
@@ -428,7 +429,10 @@ namespace NekoChat
                     if (rt.Length > 0)
                     {
                         Monitor.Enter(syncObject);
-                        this.updateText += rt;
+                        if (!first)
+                        {
+                            this.updateText += rt;
+                        }
                         this.allText += rt;
                         Monitor.Exit(syncObject);
                     }
@@ -457,9 +461,9 @@ namespace NekoChat
                     return;
                 }
 
+                first = false;
             }
         }
-
     }
 }
 

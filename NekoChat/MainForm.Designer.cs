@@ -31,7 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.richTextBoxView = new System.Windows.Forms.RichTextBox();
+            this.textBoxInput = new NekoChat.InputTextBox();
+            this.richTextBoxConsole = new System.Windows.Forms.RichTextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listBoxUser = new System.Windows.Forms.ListBox();
             this.listBoxChannel = new System.Windows.Forms.ListBox();
@@ -51,19 +54,16 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.richTextBoxConsole = new System.Windows.Forms.RichTextBox();
-            this.textBoxInput = new NekoChat.InputTextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -79,12 +79,37 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             // 
+            // splitContainer3
+            // 
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.richTextBoxView);
+            this.splitContainer3.Panel1.Controls.Add(this.textBoxInput);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.richTextBoxConsole);
+            // 
             // richTextBoxView
             // 
             resources.ApplyResources(this.richTextBoxView, "richTextBoxView");
             this.richTextBoxView.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBoxView.Name = "richTextBoxView";
             this.richTextBoxView.ReadOnly = true;
+            // 
+            // textBoxInput
+            // 
+            resources.ApplyResources(this.textBoxInput, "textBoxInput");
+            this.textBoxInput.Name = "textBoxInput";
+            this.textBoxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxInput_KeyDown);
+            // 
+            // richTextBoxConsole
+            // 
+            resources.ApplyResources(this.richTextBoxConsole, "richTextBoxConsole");
+            this.richTextBoxConsole.Name = "richTextBoxConsole";
             // 
             // splitContainer2
             // 
@@ -219,31 +244,6 @@
             resources.ApplyResources(this.notifyIcon, "notifyIcon");
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
-            // splitContainer3
-            // 
-            resources.ApplyResources(this.splitContainer3, "splitContainer3");
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.richTextBoxView);
-            this.splitContainer3.Panel1.Controls.Add(this.textBoxInput);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.richTextBoxConsole);
-            // 
-            // richTextBoxConsole
-            // 
-            resources.ApplyResources(this.richTextBoxConsole, "richTextBoxConsole");
-            this.richTextBoxConsole.Name = "richTextBoxConsole";
-            // 
-            // textBoxInput
-            // 
-            resources.ApplyResources(this.textBoxInput, "textBoxInput");
-            this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxInput_KeyDown);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -255,19 +255,20 @@
             this.Name = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ClientSizeChanged += new System.EventHandler(this.MainForm_ClientSizeChanged);
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

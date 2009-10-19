@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+
 namespace NekoChat
 {
     class ChatFile
@@ -60,12 +61,12 @@ namespace NekoChat
                         newText.Append(line);
                         newText.Append("\r\n");
                     }
-
+                    
                     // ポインタ更新
                     currentFilePos = fs.Seek(0, SeekOrigin.Current);
 
                     textAll.Append(newText.ToString());
-
+                    
                     return newText.ToString();
                 }
             }
@@ -74,7 +75,7 @@ namespace NekoChat
                 return "";
             }
         }
-
+        
         // 書き込む
         public bool Write(string text)
         {

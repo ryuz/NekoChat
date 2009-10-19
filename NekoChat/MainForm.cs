@@ -71,6 +71,13 @@ namespace NekoChat
             }
         }
 
+        // アクティブになった
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            // アイコン復帰
+            this.notifyIcon.Icon = Properties.Resources.icon_small;
+        }
+
         // タスクトレイクリック
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
@@ -89,11 +96,11 @@ namespace NekoChat
                 this.notifyIcon.Icon = Properties.Resources.icon_small;
 
                 // 末尾に移動
-                richTextBoxView.SelectionStart = richTextBoxView.TextLength;
-                richTextBoxView.SelectionLength = 0;
-                richTextBoxView.ScrollToCaret();
+                viewTextScrollToEnd();
+                consoleTextScrollToEnd();
             }
         }
+
 
 
         // 設定保存
@@ -324,9 +331,33 @@ namespace NekoChat
                     newHit = true;
                     cc.UnviewedMessage = true;
                 }
+                string[] taNew = strNew.Split('\n');
+
+                // 表示更新
+                if (index == channelIndex)
+                {
+                    // Viewに表示
+                    if (viewIndex != channelIndex || 
+                        (strNew.Length > 0 || (richTextBoxView.Text.Length == 0 && cc.Text.Length > 0)))
+                    {
+                        richTextBoxView.Text = cc.Text;
+                        viewTextScrollToEnd();
+                    }
+                }
+                else
+                {
+                    // コンソールに出力
+                    for (int i = 0; i < taNew.Count(); i++)
+                    {
+                        if (taNew[i].Length > 0)
+                        {
+                            richTextBoxConsole.Text += "<" + cc.ChannelName + "> " + taNew[i] + "\n";
+                            consoleTextScrollToEnd();
+                        }
+                    }
+                }
 
                 // キーワードチェック
-                string[] taNew = strNew.Split('\n');
                 string[] taKey = this.keywords.Split('\n');
                 for (int i = 0; i < taKey.Length; i++)
                 {
@@ -342,23 +373,6 @@ namespace NekoChat
                                     cc.UnviewedKeyword = true;
                                 }
                             }
-                        }
-                    }
-                }
-
-                if (index == channelIndex)
-                {
-                    richTextBoxView.Text = cc.Text;
-                    viewTextScrollToEnd();
-                }
-                else
-                {
-                    for (int i = 0; i < taNew.Count(); i++)
-                    {
-                        if (taNew[i].Length > 0)
-                        {
-                            richTextBoxConsole.Text += "<" + cc.ChannelName + "> " + taNew[i] + "\n";
-                            consoleTextScrollToEnd();
                         }
                     }
                 }
@@ -655,13 +669,14 @@ namespace NekoChat
             }
             dlg.ShowDialog();
         }
-
+        
         // About
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AboutForm dlg = new AboutForm();
             dlg.ShowDialog();
         }
+
 
 
     }
