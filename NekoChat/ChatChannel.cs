@@ -460,7 +460,6 @@ namespace NekoChat
                 {
                     return;
                 }
-
                 first = false;
             }
         }
