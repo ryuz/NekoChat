@@ -2,8 +2,8 @@
  NekoChat
    -- 共有ファイル型チャットシステム
 
-                                        Copyright (C) 2009 by Ryuji Fuchikami 
-                                        http://homepage3.nifty.com/ryuz/
+                                   Copyright (C) 2009-2010 by Ryuji Fuchikami 
+                                   http://homepage3.nifty.com/ryuz/
 ------------------------------------------------------------------------------
 
 

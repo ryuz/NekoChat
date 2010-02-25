@@ -273,7 +273,10 @@ namespace NekoChat
             DateTime dt = DateTime.Now;
             string baseName = dt.ToString("yyyyMMdd") + ".txt";
             string fileName = Path.Combine(this.ChannelPath, baseName);
-            this.logFileName = Path.Combine(this.logPath, baseName);
+            if (this.logPath.Length > 0)
+            {
+                this.logFileName = Path.Combine(this.logPath, baseName);
+            }
             if (this.chatFile == null || fileName != this.chatFile.FileName)
             {
                 this.chatFile = new ChatFile(fileName, this.key);
