@@ -53,44 +53,26 @@ namespace NekoChat
         private volatile bool     stopThread;
 
         private ChatFile chatFile = null;
+
+        private bool opend = false;
         
         // コンストラクタ
         public ChatChannel(string channelName, string nickName, string channelPath, string key, string logPath)
         {
             this.channelName = channelName;
             this.channelPath = channelPath;
-            this.nickName = nickName;
-            this.key      = key;
-            this.userList = new ArrayList();
-            this.logPath  = logPath;
+            this.nickName    = nickName;
+            this.key         = key;
+            this.logPath     = logPath;
+            this.userList    = new ArrayList();
             
             this.Changed         = false;
             this.UnviewedMessage = false;
             this.UnviewedKeyword = false;
             
+            this.opend          = false;
 
-            // 変更監視登録
-            this.fswatcher = new FileSystemWatcher();
-            this.fswatcher.Path   = channelPath;
-            this.fswatcher.Filter = "*.txt";
-            this.fswatcher.NotifyFilter =
-                    (System.IO.NotifyFilters.LastAccess
-                    | System.IO.NotifyFilters.LastWrite);
-            this.fswatcher.Changed += new System.IO.FileSystemEventHandler(watcher_Changed);
-            this.fswatcher.Created += new System.IO.FileSystemEventHandler(watcher_Changed);
-            this.fswatcher.Deleted += new System.IO.FileSystemEventHandler(watcher_Changed);
-            this.fswatcher.EnableRaisingEvents = true;
-
-            // userファイル名作成
-            String s = CryptString.MakeMd5String(this.channelPath + nickName);
-
-            // ファイル名を作る
-            this.userFile = Path.Combine(this.ChannelPath, s + ".user");
-            
-            // スレッド開始
-            this.stopThread = false;
-            this.pollingThread = new Thread(new ThreadStart(pollongMain));
-            this.pollingThread.Start();
+            Open();
         }
         
         // デストラクタ
@@ -98,10 +80,57 @@ namespace NekoChat
         {
             Dispose();
         }
-        
-        
-        public void Dispose()
+
+
+        public bool Open()
         {
+            if ( this.opend )
+            {
+                return true;
+            }
+
+            // 変更監視登録
+            this.fswatcher = new FileSystemWatcher();
+            try
+            {
+                this.fswatcher.Path = channelPath;
+                this.fswatcher.Filter = "*.txt";
+                this.fswatcher.NotifyFilter =
+                        (System.IO.NotifyFilters.LastAccess
+                        | System.IO.NotifyFilters.LastWrite);
+                this.fswatcher.Changed += new System.IO.FileSystemEventHandler(watcher_Changed);
+                this.fswatcher.Created += new System.IO.FileSystemEventHandler(watcher_Changed);
+                this.fswatcher.Deleted += new System.IO.FileSystemEventHandler(watcher_Changed);
+                this.fswatcher.EnableRaisingEvents = true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+            // userファイル名作成
+            String s = CryptString.MakeMd5String(this.channelPath + nickName);
+
+            // ファイル名を作る
+            this.userFile = Path.Combine(this.ChannelPath, s + ".user");
+
+            // スレッド開始
+            this.stopThread = false;
+            this.pollingThread = new Thread(new ThreadStart(pollongMain));
+            this.pollingThread.Start();
+
+            this.opend = true;
+
+            return true;
+        }
+
+        public void Close()
+        {
+            if (!this.opend)
+            {
+                return;
+            }
+
             // スレッド停止
             if (this.pollingThread != null)
             {
@@ -121,6 +150,13 @@ namespace NekoChat
             catch (IOException)
             {
             }
+
+            this.opend = false;
+        }
+        
+        public void Dispose()
+        {
+            Close();
         }
 
         // ヒストリ
@@ -149,6 +185,11 @@ namespace NekoChat
         private string writeText = "";
         public void WriteMessage(String text)
         {
+            if (!this.opend)
+            {
+                return;
+            }
+
             // 送信テキストを予約
             Monitor.Enter(syncObject);
             if (writeText.Length > 0)
@@ -168,6 +209,11 @@ namespace NekoChat
         {
             string ut;
 
+            if (!this.opend)
+            {
+                return "";
+            }
+
             // 受信文字列を返す
             Monitor.Enter(syncObject);
             ut = this.updateText;
@@ -184,6 +230,11 @@ namespace NekoChat
             get
             {
                 string tx;
+
+                if (!this.opend)
+                {
+                    return "(Closed)";
+                }
 
                 Monitor.Enter(syncObject);
                 tx = this.allText;
@@ -210,8 +261,7 @@ namespace NekoChat
         
 
         // 変更監視
-        private void watcher_Changed(System.Object source,
-        System.IO.FileSystemEventArgs e)
+        private void watcher_Changed(System.Object source, System.IO.FileSystemEventArgs e)
         {
             this.Changed = true;
         }

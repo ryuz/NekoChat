@@ -40,35 +40,36 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(32, 18);
+            this.label1.Location = new System.Drawing.Point(32, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NekoChat Ver 1.01";
+            this.label1.Text = "NekoChat Ver 1.02";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(96, 58);
+            this.label2.Location = new System.Drawing.Point(96, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(204, 12);
+            this.label2.Size = new System.Drawing.Size(179, 11);
             this.label2.TabIndex = 1;
             this.label2.Text = "Copyright (C) 2009 by Ryuji Fuchikami";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(96, 70);
+            this.label3.Location = new System.Drawing.Point(96, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 12);
+            this.label3.Size = new System.Drawing.Size(167, 11);
             this.label3.TabIndex = 2;
             this.label3.Text = "http://homepage3.nifty.com/ryuz/";
             // 
             // buttonNeko
             // 
-            this.buttonNeko.Location = new System.Drawing.Point(24, 58);
+            this.buttonNeko.Location = new System.Drawing.Point(24, 53);
             this.buttonNeko.Name = "buttonNeko";
-            this.buttonNeko.Size = new System.Drawing.Size(45, 23);
+            this.buttonNeko.Size = new System.Drawing.Size(45, 21);
             this.buttonNeko.TabIndex = 3;
             this.buttonNeko.Text = "neko";
             this.buttonNeko.UseVisualStyleBackColor = true;
@@ -77,9 +78,9 @@
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(199, 108);
+            this.buttonOK.Location = new System.Drawing.Point(199, 99);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(88, 26);
+            this.buttonOK.Size = new System.Drawing.Size(88, 24);
             this.buttonOK.TabIndex = 4;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -87,9 +88,9 @@
             // AboutForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 148);
+            this.ClientSize = new System.Drawing.Size(312, 136);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonNeko);
             this.Controls.Add(this.label3);
