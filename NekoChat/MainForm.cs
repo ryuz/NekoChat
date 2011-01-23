@@ -163,8 +163,8 @@ namespace NekoChat
 
             Microsoft.Win32.RegistryKey regkey3 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Ryuz\NekoChat\options\");
             regkey3.SetValue("keywords", this.keywords);
-            regkey3.SetValue("keyword-window-popup", this.keywordWindowPopup);
-            regkey3.SetValue("keyword-taskbar-blink", this.keywordTaskbarBlink);
+            regkey3.SetValue("keyword-window-popup", this.keywordWindowPopup ? 1 : 0);
+            regkey3.SetValue("keyword-taskbar-blink", this.keywordTaskbarBlink ? 1 : 0);
             regkey3.SetValue("password", CryptString.EncryptString(Program.Password, registryKey));
             regkey3.Close();
         }
@@ -174,8 +174,8 @@ namespace NekoChat
         {
             Microsoft.Win32.RegistryKey regkey3 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Ryuz\NekoChat\options\");
             this.keywords = (string)regkey3.GetValue("keywords", "");
-            this.keywordWindowPopup  = (bool)regkey3.GetValue("keyword-window-popup", false);
-            this.keywordTaskbarBlink = (bool)regkey3.GetValue("keyword-taskbar-blink", false);
+            this.keywordWindowPopup  = ((int)regkey3.GetValue("keyword-window-popup", 0) != 0);
+            this.keywordTaskbarBlink = ((int)regkey3.GetValue("keyword-taskbar-blink", 0) != 0);
 
             Program.Password = CryptString.DecryptString((string)regkey3.GetValue("password", ""), registryKey);
             regkey3.Close();
