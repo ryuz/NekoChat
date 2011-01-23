@@ -308,7 +308,7 @@ namespace NekoChat
         // ログ出力
         private void outputLog(string text)
         {
-            if (logFileName.Length <= 0) return;
+            if (logFileName == null || logFileName.Length <= 0) return;
 
             try
             {

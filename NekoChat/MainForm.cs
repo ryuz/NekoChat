@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 
 namespace NekoChat
@@ -18,8 +19,37 @@ namespace NekoChat
         private string      keywords = "";
         private int         histryIndex = -1;
         private string      histryOrign = "";
+        private bool        keywordWindowPopup = false;
+        private bool        keywordTaskbarBlink = true;
         private const string defaultChannelKey = "neko";
         private const string registryKey = "neko800";
+
+        [DllImport("user32.dll")]
+        static extern Int32 FlashWindowEx(ref FLASHWINFO pwfi);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FLASHWINFO
+        {
+            public UInt32 cbSize;    // FLASHWINFO構造体のサイズ
+            public IntPtr hwnd;      // 点滅対象のウィンドウ・ハンドル
+            public UInt32 dwFlags;   // 以下の「FLASHW_XXX」のいずれか
+            public UInt32 uCount;    // 点滅する回数
+            public UInt32 dwTimeout; // 点滅する間隔（ミリ秒単位）
+        }
+
+        // 点滅を止める
+        public const UInt32 FLASHW_STOP = 0;
+        // タイトルバーを点滅させる
+        public const UInt32 FLASHW_CAPTION = 1;
+        // タスクバー・ボタンを点滅させる
+        public const UInt32 FLASHW_TRAY = 2;
+        // タスクバー・ボタンとタイトルバーを点滅させる
+        public const UInt32 FLASHW_ALL = 3;
+        // FLASHW_STOPが指定されるまでずっと点滅させる
+        public const UInt32 FLASHW_TIMER = 4;
+        // ウィンドウが最前面に来るまでずっと点滅させる
+        public const UInt32 FLASHW_TIMERNOFG = 12;
+
 
         // コンストラクタ
         public MainForm()
@@ -83,26 +113,29 @@ namespace NekoChat
         {
             if (e.Button == MouseButtons.Left)
             {
-                // 復元
-                this.Visible = true;
-                this.ShowInTaskbar = true;
-                if (this.WindowState == FormWindowState.Minimized)
-                {
-                    this.WindowState = FormWindowState.Normal;
-                }
-                this.Activate();
-
-                // アイコン復帰
-                this.notifyIcon.Icon = Properties.Resources.icon_small;
-
-                // 末尾に移動
-                viewTextScrollToEnd();
-                consoleTextScrollToEnd();
+                windowRestore();
             }
         }
 
+        private void windowRestore()
+        {
+            // 復元
+            this.Visible = true;
+            this.ShowInTaskbar = true;
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            this.Activate();
 
+            // アイコン復帰
+            this.notifyIcon.Icon = Properties.Resources.icon_small;
 
+            // 末尾に移動
+            viewTextScrollToEnd();
+            consoleTextScrollToEnd();
+        }
+        
         // 設定保存
         private void saveConfiguration()
         {
@@ -130,6 +163,8 @@ namespace NekoChat
 
             Microsoft.Win32.RegistryKey regkey3 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Ryuz\NekoChat\options\");
             regkey3.SetValue("keywords", this.keywords);
+            regkey3.SetValue("keyword-window-popup", this.keywordWindowPopup);
+            regkey3.SetValue("keyword-taskbar-blink", this.keywordTaskbarBlink);
             regkey3.SetValue("password", CryptString.EncryptString(Program.Password, registryKey));
             regkey3.Close();
         }
@@ -139,6 +174,9 @@ namespace NekoChat
         {
             Microsoft.Win32.RegistryKey regkey3 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Ryuz\NekoChat\options\");
             this.keywords = (string)regkey3.GetValue("keywords", "");
+            this.keywordWindowPopup  = (bool)regkey3.GetValue("keyword-window-popup", false);
+            this.keywordTaskbarBlink = (bool)regkey3.GetValue("keyword-taskbar-blink", false);
+
             Program.Password = CryptString.DecryptString((string)regkey3.GetValue("password", ""), registryKey);
             regkey3.Close();
 
@@ -179,8 +217,7 @@ namespace NekoChat
                 return;
             }
         }
-
-
+        
         // 文字入力
         const Keys pasteKeys = Keys.V | Keys.Control;
         private void textBoxInput_KeyDown(object sender, KeyEventArgs e)
@@ -230,8 +267,7 @@ namespace NekoChat
             richTextBoxConsole.SelectionLength = 0;
             richTextBoxConsole.ScrollToCaret();
         }
-
-
+        
         // up/down キー
         public void InputUpDownKey(Keys keyData)
         {
@@ -381,14 +417,35 @@ namespace NekoChat
             // キーワードチェック
             if (keyHit)
             {
+                // ウィンドウポップアップ
                 if (this.WindowState == FormWindowState.Minimized)
                 {
                     this.notifyIcon.Icon = Properties.Resources.icon_small_yellow;
+                    if (this.keywordWindowPopup)
+                    {
+                        windowRestore();
+                    }
                 }
                 else
                 {
-                    this.Focus();
-                    this.Activate();
+                    if (this.keywordWindowPopup)
+                    {
+                        this.Focus();
+                        this.Activate();
+                    }
+                }
+
+                // タスクバー点滅
+                if (this.keywordTaskbarBlink)
+                {
+                    FLASHWINFO fInfo = new FLASHWINFO();
+                    fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
+                    fInfo.hwnd = this.Handle;
+                    fInfo.dwFlags = FLASHW_ALL;
+                    fInfo.uCount = 5;         // 点滅する回数
+                    fInfo.dwTimeout = 0;
+
+                    FlashWindowEx(ref fInfo);
                 }
             }
             else if (newHit && this.WindowState == FormWindowState.Minimized)
@@ -668,6 +725,22 @@ namespace NekoChat
                 dlg.TextBoxKey.Text = defaultChannelKey;
             }
             dlg.ShowDialog();
+        }
+
+        // Options
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionForm of = new OptionForm();
+
+            of.CheckBoxWindowPopup.Checked = this.keywordWindowPopup;
+            of.CheckBoxTaskbarBlink.Checked = this.keywordTaskbarBlink;
+            if (of.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            this.keywordWindowPopup = of.CheckBoxWindowPopup.Checked;
+            this.keywordTaskbarBlink = of.CheckBoxTaskbarBlink.Checked;
+            saveConfiguration();
         }
         
         // About
