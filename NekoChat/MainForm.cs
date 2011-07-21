@@ -163,8 +163,8 @@ namespace NekoChat
 
             Microsoft.Win32.RegistryKey regkey3 = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Ryuz\NekoChat\options\");
             regkey3.SetValue("keywords", this.keywords);
-            regkey3.SetValue("keyword-window-popup", this.keywordWindowPopup ? 1 : 0);
-            regkey3.SetValue("keyword-taskbar-blink", this.keywordTaskbarBlink ? 1 : 0);
+            regkey3.SetValue("keyword-window-popup", (int)(this.keywordWindowPopup ? 1 : 0));
+            regkey3.SetValue("keyword-taskbar-blink", (int)(this.keywordTaskbarBlink ? 1 : 0));
             regkey3.SetValue("password", CryptString.EncryptString(Program.Password, registryKey));
             regkey3.Close();
         }
