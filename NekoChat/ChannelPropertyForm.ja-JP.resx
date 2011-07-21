@@ -154,4 +154,7 @@
   <data name="label4.Text" xml:space="preserve">
     <value>ログ(&amp;L) : </value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>channel property</value>
+  </data>
 </root>
