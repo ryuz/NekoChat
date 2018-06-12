@@ -44,8 +44,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NekoChat Ver 1.04";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Text = "NekoChat Ver 1.05";
             // 
             // label2
             // 
@@ -54,16 +53,16 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(234, 12);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Copyright (C) 2009-2011 by Ryuji Fuchikami";
+            this.label2.Text = "Copyright (C) 2009-2018 by Ryuji Fuchikami";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(96, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 12);
+            this.label3.Size = new System.Drawing.Size(132, 12);
             this.label3.TabIndex = 2;
-            this.label3.Text = "http://homepage3.nifty.com/ryuz/";
+            this.label3.Text = "http://ryuz.my.coocan.jp/";
             // 
             // buttonNeko
             // 

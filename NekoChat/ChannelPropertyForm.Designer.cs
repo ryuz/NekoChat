@@ -47,129 +47,78 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.AccessibleDescription = null;
-            this.buttonOK.AccessibleName = null;
             resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.BackgroundImage = null;
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Font = null;
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.AccessibleDescription = null;
-            this.buttonCancel.AccessibleName = null;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.BackgroundImage = null;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Font = null;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // TextBoxPath
             // 
-            this.TextBoxPath.AccessibleDescription = null;
-            this.TextBoxPath.AccessibleName = null;
             resources.ApplyResources(this.TextBoxPath, "TextBoxPath");
-            this.TextBoxPath.BackgroundImage = null;
-            this.TextBoxPath.Font = null;
             this.TextBoxPath.Name = "TextBoxPath";
             // 
             // label1
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
             resources.ApplyResources(this.label1, "label1");
-            this.label1.Font = null;
             this.label1.Name = "label1";
             // 
             // label2
             // 
-            this.label2.AccessibleDescription = null;
-            this.label2.AccessibleName = null;
             resources.ApplyResources(this.label2, "label2");
-            this.label2.Font = null;
             this.label2.Name = "label2";
             // 
             // TextBoxName
             // 
-            this.TextBoxName.AccessibleDescription = null;
-            this.TextBoxName.AccessibleName = null;
             resources.ApplyResources(this.TextBoxName, "TextBoxName");
-            this.TextBoxName.BackgroundImage = null;
-            this.TextBoxName.Font = null;
             this.TextBoxName.Name = "TextBoxName";
             // 
             // label3
             // 
-            this.label3.AccessibleDescription = null;
-            this.label3.AccessibleName = null;
             resources.ApplyResources(this.label3, "label3");
-            this.label3.Font = null;
             this.label3.Name = "label3";
             // 
             // TextBoxKey
             // 
-            this.TextBoxKey.AccessibleDescription = null;
-            this.TextBoxKey.AccessibleName = null;
             resources.ApplyResources(this.TextBoxKey, "TextBoxKey");
-            this.TextBoxKey.BackgroundImage = null;
-            this.TextBoxKey.Font = null;
             this.TextBoxKey.Name = "TextBoxKey";
             // 
             // buttonPathRef
             // 
-            this.buttonPathRef.AccessibleDescription = null;
-            this.buttonPathRef.AccessibleName = null;
             resources.ApplyResources(this.buttonPathRef, "buttonPathRef");
-            this.buttonPathRef.BackgroundImage = null;
-            this.buttonPathRef.Font = null;
             this.buttonPathRef.Name = "buttonPathRef";
             this.buttonPathRef.UseVisualStyleBackColor = true;
             this.buttonPathRef.Click += new System.EventHandler(this.buttonPathRef_Click);
             // 
             // label5
             // 
-            this.label5.AccessibleDescription = null;
-            this.label5.AccessibleName = null;
             resources.ApplyResources(this.label5, "label5");
-            this.label5.Font = null;
             this.label5.Name = "label5";
             // 
             // TextBoxChannelName
             // 
-            this.TextBoxChannelName.AccessibleDescription = null;
-            this.TextBoxChannelName.AccessibleName = null;
             resources.ApplyResources(this.TextBoxChannelName, "TextBoxChannelName");
-            this.TextBoxChannelName.BackgroundImage = null;
-            this.TextBoxChannelName.Font = null;
             this.TextBoxChannelName.Name = "TextBoxChannelName";
             // 
             // label4
             // 
-            this.label4.AccessibleDescription = null;
-            this.label4.AccessibleName = null;
             resources.ApplyResources(this.label4, "label4");
-            this.label4.Font = null;
             this.label4.Name = "label4";
             // 
             // TextBoxLogPath
             // 
-            this.TextBoxLogPath.AccessibleDescription = null;
-            this.TextBoxLogPath.AccessibleName = null;
             resources.ApplyResources(this.TextBoxLogPath, "TextBoxLogPath");
-            this.TextBoxLogPath.BackgroundImage = null;
-            this.TextBoxLogPath.Font = null;
             this.TextBoxLogPath.Name = "TextBoxLogPath";
             // 
             // buttonLogRef
             // 
-            this.buttonLogRef.AccessibleDescription = null;
-            this.buttonLogRef.AccessibleName = null;
             resources.ApplyResources(this.buttonLogRef, "buttonLogRef");
-            this.buttonLogRef.BackgroundImage = null;
-            this.buttonLogRef.Font = null;
             this.buttonLogRef.Name = "buttonLogRef";
             this.buttonLogRef.UseVisualStyleBackColor = true;
             this.buttonLogRef.Click += new System.EventHandler(this.buttonLogRef_Click);
@@ -177,11 +126,8 @@
             // ChannelPropertyForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = null;
             this.ControlBox = false;
             this.Controls.Add(this.buttonLogRef);
             this.Controls.Add(this.TextBoxLogPath);
@@ -197,9 +143,7 @@
             this.Controls.Add(this.TextBoxPath);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = null;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChannelPropertyForm";

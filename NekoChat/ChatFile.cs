@@ -74,6 +74,10 @@ namespace NekoChat
             {
                 return "";
             }
+            catch (IOException)
+            {
+                return "";
+            }
         }
         
         // 書き込む

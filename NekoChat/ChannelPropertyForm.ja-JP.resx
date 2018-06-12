@@ -125,10 +125,10 @@
     <value>キャンセル</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 12</value>
+    <value>78, 12</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>パス(&amp;P) : </value>
+    <value>データパス(&amp;D) : </value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 12</value>
@@ -137,10 +137,10 @@
     <value>ニックネーム(&amp;N) : </value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 12</value>
+    <value>77, 12</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>キーワード(&amp;K) : </value>
+    <value>パスワード(&amp;P) : </value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 12</value>

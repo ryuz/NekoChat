@@ -323,6 +323,9 @@ namespace NekoChat
             catch (FileNotFoundException)
             {
             }
+            catch(IOException)
+            {
+            }
         }
 
         private void tryWriteUserFile()
@@ -348,6 +351,9 @@ namespace NekoChat
             catch (FileNotFoundException)
             {
             }
+            catch (IOException)
+            {
+            }
         }
 
 
@@ -362,41 +368,47 @@ namespace NekoChat
                 return ul;
             }
 
-            DirectoryInfo di = new DirectoryInfo(this.channelPath);
-            FileInfo[] fi = di.GetFiles("*.user");
-            for (int i = 0; i < fi.Length; i++)
+            try
             {
-                try
+                DirectoryInfo di = new DirectoryInfo(this.channelPath);
+                FileInfo[] fi = di.GetFiles("*.user");
+                for (int i = 0; i < fi.Length; i++)
                 {
-                    using (FileStream fs = fi[i].Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (StreamReader sr = new StreamReader(fs))
+                    try
                     {
-                        String line;
+                        using (FileStream fs = fi[i].Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        using (StreamReader sr = new StreamReader(fs))
+                        {
+                            String line;
 
-                        // ヘッダ
-                        if ((line = sr.ReadLine()) == null) { continue; }
-                        line = CryptString.DecryptString(line, this.Key);
-                        if (line != "neko") { continue; }
+                            // ヘッダ
+                            if ((line = sr.ReadLine()) == null) { continue; }
+                            line = CryptString.DecryptString(line, this.Key);
+                            if (line != "neko") { continue; }
 
-                        // 時刻
-                        if ((line = sr.ReadLine()) == null) { continue; }
-                        line = CryptString.DecryptString(line, this.Key);
-                        DateTime dt  = DateTime.Parse(line);
-                        DateTime now = DateTime.Now;
-                        TimeSpan p = now - dt; 
-                        double pass = p.TotalSeconds;
-                        pass = Math.Abs(pass);
-                        if (pass > 180) { continue; }
+                            // 時刻
+                            if ((line = sr.ReadLine()) == null) { continue; }
+                            line = CryptString.DecryptString(line, this.Key);
+                            DateTime dt = DateTime.Parse(line);
+                            DateTime now = DateTime.Now;
+                            TimeSpan p = now - dt;
+                            double pass = p.TotalSeconds;
+                            pass = Math.Abs(pass);
+                            if (pass > 180) { continue; }
 
-                        // 名前
-                        if ((line = sr.ReadLine()) == null) { continue; }
-                        line = CryptString.DecryptString(line, this.Key);
-                        ul.Add(line);
+                            // 名前
+                            if ((line = sr.ReadLine()) == null) { continue; }
+                            line = CryptString.DecryptString(line, this.Key);
+                            ul.Add(line);
+                        }
+                    }
+                    catch (FileNotFoundException)
+                    {
                     }
                 }
-                catch (FileNotFoundException)
-                {
-                }
+            }
+            catch (IOException)
+            {
             }
 
             return ul;
