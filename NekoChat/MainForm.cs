@@ -19,6 +19,7 @@ namespace NekoChat
         private string      keywords = "";
         private int         histryIndex = -1;
         private string      histryOrign = "";
+        private bool        anywordWindowPopup = false;
         private bool        keywordWindowPopup = false;
         private bool        keywordTaskbarBlink = true;
         private const string defaultChannelKey = "neko";
@@ -165,6 +166,7 @@ namespace NekoChat
             regkey3.SetValue("keywords", this.keywords);
             regkey3.SetValue("keyword-window-popup", (int)(this.keywordWindowPopup ? 1 : 0));
             regkey3.SetValue("keyword-taskbar-blink", (int)(this.keywordTaskbarBlink ? 1 : 0));
+            regkey3.SetValue("anyword-window-popup", (int)(this.anywordWindowPopup ? 1 : 0));
             regkey3.SetValue("password", CryptString.EncryptString(Program.Password, registryKey));
             regkey3.Close();
         }
@@ -176,6 +178,7 @@ namespace NekoChat
             this.keywords = (string)regkey3.GetValue("keywords", "");
             this.keywordWindowPopup  = ((int)regkey3.GetValue("keyword-window-popup", 0) != 0);
             this.keywordTaskbarBlink = ((int)regkey3.GetValue("keyword-taskbar-blink", 0) != 0);
+            this.anywordWindowPopup  = ((int)regkey3.GetValue("anyword-window-popup", 0) != 0);
 
             Program.Password = CryptString.DecryptString((string)regkey3.GetValue("password", ""), registryKey);
             regkey3.Close();
@@ -411,6 +414,21 @@ namespace NekoChat
                             }
                         }
                     }
+                }
+            }
+
+            // 任意の文字でポップアップ
+            if (this.anywordWindowPopup && update)
+            {
+                // ウィンドウポップアップ
+                if (this.WindowState == FormWindowState.Minimized)
+                {
+                    windowRestore();
+                }
+                else
+                {
+                    this.Focus();
+                    this.Activate();
                 }
             }
 
