@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionForm));
-            this.CheckBoxWindowPopup = new System.Windows.Forms.CheckBox();
+            this.CheckBoxKeywordWindowPopup = new System.Windows.Forms.CheckBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.CheckBoxTaskbarBlink = new System.Windows.Forms.CheckBox();
+            this.CheckBoxAnywordWindowPopup = new System.Windows.Forms.CheckBox();
+            this.CheckBoxKeywordTaskbarBlink = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -39,44 +40,51 @@
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // CheckBoxWindowPopup
+            // CheckBoxKeywordWindowPopup
             // 
-            resources.ApplyResources(this.CheckBoxWindowPopup, "CheckBoxWindowPopup");
-            this.CheckBoxWindowPopup.Name = "CheckBoxWindowPopup";
-            this.CheckBoxWindowPopup.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.CheckBoxKeywordWindowPopup, "CheckBoxKeywordWindowPopup");
+            this.CheckBoxKeywordWindowPopup.Name = "CheckBoxKeywordWindowPopup";
+            this.CheckBoxKeywordWindowPopup.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.CheckBoxTaskbarBlink);
-            this.tabPage1.Controls.Add(this.CheckBoxWindowPopup);
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.CheckBoxAnywordWindowPopup);
+            this.tabPage1.Controls.Add(this.CheckBoxKeywordTaskbarBlink);
+            this.tabPage1.Controls.Add(this.CheckBoxKeywordWindowPopup);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // CheckBoxTaskbarBlink
+            // CheckBoxAnywordWindowPopup
             // 
-            resources.ApplyResources(this.CheckBoxTaskbarBlink, "CheckBoxTaskbarBlink");
-            this.CheckBoxTaskbarBlink.Name = "CheckBoxTaskbarBlink";
-            this.CheckBoxTaskbarBlink.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.CheckBoxAnywordWindowPopup, "CheckBoxAnywordWindowPopup");
+            this.CheckBoxAnywordWindowPopup.Name = "CheckBoxAnywordWindowPopup";
+            this.CheckBoxAnywordWindowPopup.UseVisualStyleBackColor = true;
+            // 
+            // CheckBoxKeywordTaskbarBlink
+            // 
+            resources.ApplyResources(this.CheckBoxKeywordTaskbarBlink, "CheckBoxKeywordTaskbarBlink");
+            this.CheckBoxKeywordTaskbarBlink.Name = "CheckBoxKeywordTaskbarBlink";
+            this.CheckBoxKeywordTaskbarBlink.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // buttonOk
             // 
-            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             resources.ApplyResources(this.buttonOk, "buttonOk");
+            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -107,7 +115,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        public System.Windows.Forms.CheckBox CheckBoxWindowPopup;
-        public System.Windows.Forms.CheckBox CheckBoxTaskbarBlink;
+        public System.Windows.Forms.CheckBox CheckBoxKeywordWindowPopup;
+        public System.Windows.Forms.CheckBox CheckBoxKeywordTaskbarBlink;
+        public System.Windows.Forms.CheckBox CheckBoxAnywordWindowPopup;
     }
 }

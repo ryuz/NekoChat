@@ -750,14 +750,16 @@ namespace NekoChat
         {
             OptionForm of = new OptionForm();
 
-            of.CheckBoxWindowPopup.Checked = this.keywordWindowPopup;
-            of.CheckBoxTaskbarBlink.Checked = this.keywordTaskbarBlink;
+            of.CheckBoxKeywordTaskbarBlink.Checked = this.keywordTaskbarBlink;
+            of.CheckBoxKeywordWindowPopup.Checked = this.keywordWindowPopup;
+            of.CheckBoxAnywordWindowPopup.Checked = this.anywordWindowPopup;
             if (of.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-            this.keywordWindowPopup = of.CheckBoxWindowPopup.Checked;
-            this.keywordTaskbarBlink = of.CheckBoxTaskbarBlink.Checked;
+            this.keywordTaskbarBlink = of.CheckBoxKeywordTaskbarBlink.Checked;
+            this.keywordWindowPopup = of.CheckBoxKeywordWindowPopup.Checked;
+            this.anywordWindowPopup = of.CheckBoxAnywordWindowPopup.Checked;
             saveConfiguration();
         }
         

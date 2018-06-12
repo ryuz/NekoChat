@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CheckBoxWindowPopup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 17</value>
+  <data name="CheckBoxKeywordWindowPopup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 16</value>
   </data>
-  <data name="CheckBoxWindowPopup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 16</value>
+  <data name="CheckBoxKeywordWindowPopup.Text" xml:space="preserve">
+    <value>キーワードでウィンドウポップアップ(&amp;W)</value>
   </data>
-  <data name="CheckBoxWindowPopup.Text" xml:space="preserve">
-    <value>最小化時ウィンドウをポップアップさせる</value>
+  <data name="CheckBoxAnywordWindowPopup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 16</value>
   </data>
-  <data name="CheckBoxTaskbarBlink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 39</value>
+  <data name="CheckBoxAnywordWindowPopup.Text" xml:space="preserve">
+    <value>任意のメッセージでウィンドウポップアップ(&amp;A)</value>
   </data>
-  <data name="CheckBoxTaskbarBlink.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 16</value>
+  <data name="CheckBoxKeywordTaskbarBlink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 16</value>
   </data>
-  <data name="CheckBoxTaskbarBlink.Text" xml:space="preserve">
-    <value>タスクバーを点滅させる</value>
+  <data name="CheckBoxKeywordTaskbarBlink.Text" xml:space="preserve">
+    <value>キーワードでタスクバーアイコン点滅(&amp;T)</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>キーワードヒット時</value>
